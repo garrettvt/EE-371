@@ -129,21 +129,21 @@ module line_drawer_testbench();
 
 	initial begin
 		x0 <= 9'd0; x1 <= 9'd0; y0 <= 8'd0; y1 <= 8'd0;  repeat(1)   @(posedge    clk);
-		reset <= 1;	 					repeat(1)   @(posedge    clk);
-		reset <= 0;	 					repeat(1)   @(posedge    clk);
+		reset <= 1;	 			repeat(1)   @(posedge    clk);
+		reset <= 0;	 			repeat(1)   @(posedge    clk);
 		x1 <= 9'd2; y1 <= 8'd3;			repeat(1)   @(posedge    clk);
-										repeat(6)  @(posedge    clk);
-		reset <= 1;	 					repeat(1)   @(posedge    clk);
-		reset <= 0;	 					repeat(1)   @(posedge    clk);
+							repeat(6)  @(posedge    clk);
+		reset <= 1;	 			repeat(1)   @(posedge    clk);
+		reset <= 0;	 			repeat(1)   @(posedge    clk);
 		x1 <= 9'd0; y1 <= 8'd0;			repeat(1)   @(posedge    clk);
 		x0 <= 9'd4; y0 <= 8'd5;			repeat(1)   @(posedge    clk);
-											repeat(10)  @(posedge    clk);
+							repeat(10)  @(posedge    clk);
 		x0 <= 9'd0; x1 <= 9'd0; y0 <= 8'd0; y1 <= 8'd0;  repeat(1)   @(posedge    clk);
-		reset <= 1;	 					repeat(1)   @(posedge    clk);
-		reset <= 0;	 					repeat(5)   @(posedge    clk);
+		reset <= 1;	 			repeat(1)   @(posedge    clk);
+		reset <= 0;	 			repeat(5)   @(posedge    clk);
 		x0 <= 9'd0; x1 <= 9'd0; y0 <= 8'd0; y1 <= 8'd8;  repeat(1)   @(posedge    clk);
-		reset <= 1;	 					repeat(1)   @(posedge    clk);
-		reset <= 0;	 					repeat(15)   @(posedge    clk);
+		reset <= 1;	 			repeat(1)   @(posedge    clk);
+		reset <= 0;	 			repeat(15)   @(posedge    clk);
 		$stop; // End the simulation.
 	end
 endmodule 
