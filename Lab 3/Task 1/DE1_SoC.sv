@@ -48,15 +48,15 @@ module DE1_SoC (HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW, CLOCK_50,
 	/////////////////////////////////////
 	
 	VGA_framebuffer fb(.clk(CLOCK_50), .rst(1'b0), .x, .y,
-				.pixel_color, .pixel_write(1'b1), .dfb_en, .frame_start,
-				.VGA_R, .VGA_G, .VGA_B, .VGA_CLK, .VGA_HS, .VGA_VS,
-				.VGA_BLANK_N, .VGA_SYNC_N);
+			   .pixel_color, .pixel_write(1'b1), .dfb_en, .frame_start,
+			   .VGA_R, .VGA_G, .VGA_B, .VGA_CLK, .VGA_HS, .VGA_VS,
+			   .VGA_BLANK_N, .VGA_SYNC_N);
 	
 	// draw lines between (x0, y0) and (x1, y1)
 	//line_drawer will draw a line between the two
 	//corrdinates
 	line_drawer lines (.clk(CLOCK_50), .reset(1'b0),
-				.x0, .y0, .x1, .y1, .x, .y);
+			   .x0, .y0, .x1, .y1, .x, .y);
 	
 	// draw an arbitrary line
 	assign x0 = 0;
@@ -74,33 +74,33 @@ endmodule
 //for proper updates to 10-bit value x, and 9-bit value y. This
 //was done to be able to easily see the values updating properly.
 module DE1_SoC_testbench();
-		logic [6:0] HEX0, HEX1, HEX2, HEX3, HEX4, HEX5;
-		logic [9:0] LEDR;
-		logic [3:0] KEY;
-		logic [9:0] SW;
+	logic [6:0] HEX0, HEX1, HEX2, HEX3, HEX4, HEX5;
+	logic [9:0] LEDR;
+	logic [3:0] KEY;
+	logic [9:0] SW;
 
-		logic CLOCK_50;
-		logic [7:0] VGA_R;
-		logic [7:0] VGA_G;
-		logic [7:0] VGA_B;
-		logic VGA_BLANK_N;
-		logic VGA_CLK;
-		logic VGA_HS;
-		logic VGA_SYNC_N;
-		logic VGA_VS;
-		
-		
-		DE1_SoC dut(.HEX0, .HEX1, .HEX2, .HEX3, .HEX4, .HEX5, .KEY, .LEDR, .SW, .CLOCK_50, 
-						.VGA_R, .VGA_G, .VGA_B, .VGA_BLANK_N, .VGA_CLK, .VGA_HS, .VGA_SYNC_N, .VGA_VS);
-						
-		parameter CLOCK_PERIOD=100;
-		initial begin
-			CLOCK_50 <= 0;
-			forever #(CLOCK_PERIOD/2) CLOCK_50 <= ~CLOCK_50; // Forever toggle the clock
-		end
-		
-		initial begin
-									repeat(50)   @(posedge    CLOCK_50);
-			$stop; // End the simulation.
-		end
+	logic CLOCK_50;
+	logic [7:0] VGA_R;
+	logic [7:0] VGA_G;
+	logic [7:0] VGA_B;
+	logic VGA_BLANK_N;
+	logic VGA_CLK;
+	logic VGA_HS;
+	logic VGA_SYNC_N;
+	logic VGA_VS;
+
+
+	DE1_SoC dut(.HEX0, .HEX1, .HEX2, .HEX3, .HEX4, .HEX5, .KEY, .LEDR, .SW, .CLOCK_50, 
+		    .VGA_R, .VGA_G, .VGA_B, .VGA_BLANK_N, .VGA_CLK, .VGA_HS, .VGA_SYNC_N, .VGA_VS);
+
+	parameter CLOCK_PERIOD=100;
+	initial begin
+		CLOCK_50 <= 0;
+		forever #(CLOCK_PERIOD/2) CLOCK_50 <= ~CLOCK_50; // Forever toggle the clock
+	end
+
+	initial begin
+								repeat(50)   @(posedge    CLOCK_50);
+		$stop; // End the simulation.
+	end
 endmodule 
